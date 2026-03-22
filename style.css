@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+:root {
+    --luxury-gold: #c5a059;
+    --luxury-silver: #e0e0e0;
+    --premium-blue: #1a365d;
+    --bright-bg: #fdfdfd;
+    --watch-face: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-gold: #a67c00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bright-bg);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none; /* Let clicks pass to UI */
+}
+
+/* Wrapper to hold watch and laps together */
+.stopwatch-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* Space between watch and laps */
+    z-index: 1;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.stopwatch-container {
+    width: 400px;
+    background: var(--watch-face);
+    border-radius: 50%;
+    height: 400px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 8px #f8f8f8,
+        inset 0 0 0 9px var(--luxury-silver),
+        inset 0 0 15px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.stopwatch-container::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    width: 36px;
+    height: 12px;
+    background: var(--luxury-gold);
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 4px 8px rgba(197, 160, 89, 0.2);
+}
+
+.display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.time {
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: var(--text-dark);
+    letter-spacing: -1px;
+}
+
+.milliseconds {
+    font-size: 1.1rem;
+    color: var(--luxury-gold);
+    font-weight: 600;
+}
+
+.display::after {
+    content: 'CHRONOGRAPH LUXE';
+    display: block;
+    margin-top: 5px;
+    font-size: 0.55rem;
+    letter-spacing: 3px;
+    color: var(--luxury-gold);
+    font-weight: 800;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: 1px solid var(--luxury-silver);
+    background: white;
+    color: var(--text-dark);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+    background: var(--luxury-gold);
+    color: white;
+    transform: scale(1.05);
+}
+
+.btn:disabled { opacity: 0.2; cursor: not-allowed; }
+
+.primary-btn { border-color: var(--premium-blue); color: var(--premium-blue); }
+.primary-btn:hover:not(:disabled) { background: var(--premium-blue); border-color: var(--premium-blue); }
+.primary-btn.pause { color: #cc0000; }
+.primary-btn.pause:hover:not(:disabled) { background: #cc0000; border-color: #cc0000; }
+
+.laps-container {
+    width: 380px;
+    max-height: 180px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.laps-container::-webkit-scrollbar { width: 4px; }
+.laps-container::-webkit-scrollbar-thumb { background: var(--luxury-silver); border-radius: 10px; }
+
+.laps-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px 8px;
+    font-size: 0.6rem;
+    color: #888;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 8px;
+}
+
+.laps-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.lap-item {
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-bottom: 1px solid #fafafa;
+}
+
+.lap-item span:first-child { font-weight: 700; color: var(--luxury-gold); }
+.lap-item span:last-child { font-weight: 500; color: var(--premium-blue); }
+
+.stopwatch-container::after {
+    content: '';
+    position: absolute;
+    width: 85%; height: 85%;
+    border-radius: 50%;
+    border: 1px dashed rgba(197, 160, 89, 0.1);
+    pointer-events: none;
+}

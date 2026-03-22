@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Chronograph</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Interactive Canvas -->
+    <canvas id="bgCanvas"></canvas>
+
+    <div class="stopwatch-wrapper">
+        <div class="stopwatch-container">
+            <div class="display">
+                <span id="time" class="time">00:00:00</span><span id="milliseconds" class="milliseconds">.00</span>
+            </div>
+            
+            <div class="controls">
+                <button id="lapBtn" class="btn secondary-btn" disabled>Lap</button>
+                <button id="startPauseBtn" class="btn primary-btn">Start</button>
+                <button id="resetBtn" class="btn secondary-btn" disabled>Reset</button>
+            </div>
+        </div>
+
+        <div class="laps-container">
+            <div class="laps-header">
+                <span>Lap</span>
+                <span>Lap Time</span>
+                <span>Total Time</span>
+            </div>
+            <ul id="lapsList" class="laps-list">
+                <!-- Laps will be dynamically inserted here -->
+            </ul>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
